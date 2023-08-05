@@ -7,138 +7,60 @@ transform::transform(const Shape& sh)
 
 Shape transform::shift(int m, int n, int k)
 {
-	switch (std::get<Shape::TypeOne>(shape.getType()))
+	for (auto& x : shape.getCoord().find('x')->second)
+		x += m;
+
+	for (auto& y : shape.getCoord().find('y')->second)
+		y += n;
+
+	if (shape.getCoord().contains('z'))
 	{
-	case Shape::TypeOne::line:
-		for (int i = 0; i < 2; ++i)
-		{
-			shape.coord.find('x')->second[i] += m;
-			shape.coord.find('y')->second[i] += n;
-		}
-		break;
-	case Shape::TypeOne::sqr:
-		for (int i = 0; i < 4; ++i)
-		{
-			shape.coord.find('x')->second[i] += m;
-			shape.coord.find('y')->second[i] += n;
-		}
-		break;
-	case Shape::TypeOne::cube:
-		for (int i = 0; i < 8; ++i)
-		{
-			shape.coord.find('x')->second[i] += m;
-			shape.coord.find('y')->second[i] += n;
-			shape.coord.find('z')->second[i] += k;
-		}
-		break;
+		for (auto& z : shape.getCoord().find('z')->second)
+			z += k;
 	}
+
 	return shape;
 }
 
 Shape transform::scaleX(int a)
 {
-	switch (std::get<Shape::TypeOne>(shape.getType()))
-	{
-	case Shape::TypeOne::line:
-		for (int i = 0; i < 2; ++i)
-		{
-			shape.coord.find('x')->second[i] *= a;
-		}
-		break;
-	case Shape::TypeOne::sqr:
-		for (int i = 0; i < 4; ++i)
-		{
-			shape.coord.find('x')->second[i] *= a;
-		}
-		break;
-	case Shape::TypeOne::cube:
-		for (int i = 0; i < 8; ++i)
-		{
-			shape.coord.find('x')->second[i] *= a;
-		}
-		break;
-	}
+	for (auto& x : shape.getCoord().find('x')->second)
+		x *= a;
+
 	return shape;
 }
 
 Shape transform::scaleY(int d)
 {
-	switch (std::get<Shape::TypeOne>(shape.getType()))
-	{
-	case Shape::TypeOne::line:
-		for (int i = 0; i < 2; ++i)
-		{
-			shape.coord.find('y')->second[i] *= d;
-		}
-		break;
-	case Shape::TypeOne::sqr:
-		for (int i = 0; i < 4; ++i)
-		{
-			shape.coord.find('y')->second[i] *= d;
-		}
-		break;
-	case Shape::TypeOne::cube:
-		for (int i = 0; i < 8; ++i)
-		{
-			shape.coord.find('y')->second[i] *= d;
-		}
-		break;
-	}
+	for (auto& y : shape.getCoord().find('y')->second)
+		y *= d;
+
 	return shape;
 }
 
 Shape transform::scaleZ(int e)
 {
-	switch (std::get<Shape::TypeOne>(shape.getType()))
+	if (shape.getCoord().contains('z'))
 	{
-	case Shape::TypeOne::line:
-		for (int i = 0; i < 2; ++i)
-		{
-			shape.coord.find('z')->second[i] *= e;
-		}
-		break;
-	case Shape::TypeOne::sqr:
-		for (int i = 0; i < 4; ++i)
-		{
-			shape.coord.find('z')->second[i] *= e;
-		}
-		break;
-	case Shape::TypeOne::cube:
-		for (int i = 0; i < 8; ++i)
-		{
-			shape.coord.find('z')->second[i] *= e;
-		}
-		break;
+		for (auto& z : shape.getCoord().find('z')->second)
+			z *= e;
 	}
+
 	return shape;
 }
 
 Shape transform::scale(int s)
 {
-	switch (std::get<Shape::TypeOne>(shape.getType()))
+	for (auto& x : shape.getCoord().find('x')->second)
+		x /= s;
+
+	for (auto& y : shape.getCoord().find('y')->second)
+		y /= s;
+
+	if (shape.getCoord().contains('z'))
 	{
-	case Shape::TypeOne::line:
-		for (int i = 0; i < 2; ++i)
-		{
-			shape.coord.find('x')->second[i] /= s;
-			shape.coord.find('y')->second[i] /= s;
-		}
-		break;
-	case Shape::TypeOne::sqr:
-		for (int i = 0; i < 4; ++i)
-		{
-			shape.coord.find('x')->second[i] /= s;
-			shape.coord.find('y')->second[i] /= s;
-		}
-		break;
-	case Shape::TypeOne::cube:
-		for (int i = 0; i < 8; ++i)
-		{
-			shape.coord.find('x')->second[i] /= s;
-			shape.coord.find('y')->second[i] /= s;
-			shape.coord.find('z')->second[i] /= s;
-		}
-		break;
+		for (auto& z : shape.getCoord().find('z')->second)
+			z /= s;
 	}
 
 	return shape;
