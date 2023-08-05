@@ -11,15 +11,15 @@ int main() {
 	coord.emplace('z', std::vector<int> {18, 19, 20, 21, 22, 23, 24, 25});
 
 	Shape cube(3, coord);
-	std::cout << "Площадь куба: " << cube.calc_square() << "\nОбъем куба: " << cube.calc_volume() << std::endl;
+	std::cout << "Площадь куба: " << cube.getSquare() << "\nОбъем куба: " << cube.getVolume() << std::endl;
 
 	Shape cylinder(5, coord, 15, 30);
-	std::cout << "\nПлощадь цилиндра: " << cylinder.calc_square() << "\nОбъем цилиндра: " << cylinder.calc_volume() << std::endl;
+	std::cout << "\nПлощадь цилиндра: " << cylinder.getSquare() << "\nОбъем цилиндра: " << cylinder.getVolume() << std::endl;
 
 	transform cube_t(cube);
 	cube_t.scale(2);
 
-	std::cout << "\nПлощадь куба после скалирования: " << cube.calc_square() << "\nОбъем куба после скалирования: " << cube.calc_volume() << std::endl;
+	std::cout << "\nПлощадь куба после скалирования: " << cube.getSquare() << "\nОбъем куба после скалирования: " << cube.getVolume() << std::endl;
 
 	return 0;
 }
